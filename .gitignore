@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# 추가
+migrations/
+secrets.json
+db.sqlite3
+.gitignore
