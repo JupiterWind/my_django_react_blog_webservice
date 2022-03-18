@@ -131,6 +131,5 @@ dmypy.json
 # 추가
 migrations/
 db.sqlite3
-.gitignore
 .prettierrc
 .env.dev
