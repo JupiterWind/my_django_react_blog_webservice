@@ -130,6 +130,7 @@ dmypy.json
 
 # 추가
 migrations/
+secrets.json
 db.sqlite3
 .prettierrc
 .env.dev
