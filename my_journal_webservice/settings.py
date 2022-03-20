@@ -92,11 +92,14 @@ WSGI_APPLICATION = 'my_journal_webservice.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3' ) ,
+        'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER': os.environ.get('SQL_USER'),
+        'PASSWORD' : os.environ.get('SQL_PASSWORD'),
+        'HOST' : os.environ.get('SQL_HOST'),
+        'PORT' : os.environ.get('SQL_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
