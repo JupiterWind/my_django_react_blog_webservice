@@ -16,6 +16,7 @@ services:
   db:
     image: mariadb
     volumes:
+      - ./db/conf.d:/etc/mysql/conf.d # 로컬 컴퓨터의 폴더와 도커의 폴더를 연결. /db/conf.d를 /etc/mysql/폴더와 연결
       - mariadb_data:/var/lib/mariadb/data/
     ports:
       - 3306:3306
