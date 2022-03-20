@@ -7,6 +7,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn my_journal_webservice.wsgi:application --bind 0.0.0.0:8000
     volumes:
+      - static_volume:/usr/src/app/_static
       - ./:/usr/src/app/ # 로컬 컴퓨터의 폴더와 도커의 폴더를 연결. 현재폴더를 /usr/src/app/폴더와 연결
     ports:
       - 8000:8000
@@ -27,3 +28,4 @@ services:
 
 volumes:
   mariadb_data:
+  static_volume:
