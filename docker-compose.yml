@@ -24,7 +24,6 @@ services:
       - mariadb_data:/var/lib/mariadb/data/
     env_file:
       - ./.env.prod.db
-    restart: always
 
 volumes:
   mariadb_data:
