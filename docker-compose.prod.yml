@@ -19,9 +19,9 @@ services:
       - mariadb_data:/var/lib/mariadb/data/
     ports:
       - 3306:3306
+    env_file:
+      - ./.env.prod.db
     restart: always
-    environment:
-      - TZ: Asia/Seoul
 
 volumes:
   mariadb_data:
