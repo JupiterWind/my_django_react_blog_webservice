@@ -3,6 +3,7 @@ version: '3'
 
 services:
   nginx:
+    container_name: nginx
     build: ./nginx # ngnix 컨테이너를 만들기 위한 파일을 넣을 ngnix폴더를 만든다.
     volumes:
       - static_volume:/usr/src/app/_static
@@ -11,6 +12,7 @@ services:
     depends_on:
       - web
   web:
+    container_name: web
     build: . # 현재 폴더를 build. Dockerfile을 이용해 컨테이너 이미지를 만든다.
     command: gunicorn my_journal_webservice.wsgi:application --bind 0.0.0.0:8000
     volumes:
@@ -23,6 +25,7 @@ services:
     depends_on:
       - db
   db:
+    container_name: db
     image: mariadb
     ports:
       - 3306:3306
