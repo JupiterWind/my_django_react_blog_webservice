@@ -1,8 +1,15 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from rest_framework import viewsets
 
-from blog.models import Post
+from .models import Post
+from .serializers import PostSerializer
 
+class PostList(viewsets.ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+
+'''
 class PostList(ListView):
     model = Post
     ordering = 'created_at'
@@ -11,3 +18,4 @@ class PostList(ListView):
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data(**kwargs)
         return context
+'''
