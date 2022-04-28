@@ -57,9 +57,11 @@ INSTALLED_APPS = [
 
     'blog',
     'rest_framework', #추가
+    'corsheaders', # 추가
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',     # 추가
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,6 +136,10 @@ USE_I18N = True
 
 USE_TZ = False
 
+#script안에서의 리소스 요청을 허용할 도메인 추가
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView
-from rest_framework import viewsets
+from rest_framework.viewsets import ReadOnlyModelViewSet   # ViewSet 임포트
+
 
 from .models import Post
 from .serializers import PostSerializer
 
-class PostList(viewsets.ModelViewSet):
+class PostViewSet(ReadOnlyModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
