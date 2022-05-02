@@ -1,13 +1,21 @@
 import { createTheme } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+import { dark, light } from '@mui/material/styles/createPalette';
 
 export const myMaterialTheme = createTheme({
   palette: {
+    type: light,
     primary: {
-      main: '#ffffff', // 주 색상
+      main: '#000000', // 주 색상
     },
     secondary: {
-      main: '#000000',
+      main: '#f2f2f2',
+    },
+  },
+  typography: {
+    fontFamily: ['Ubuntu'].join(','),
+    button: {
+      fontWeight: 'bold',
+      letterSpacing: '0.04em',
     },
   },
 });
