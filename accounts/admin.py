@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
-from .models import MyUser
+from .models import User
 
 # /* contrib.auth로 관리자 페이지 커스텀화 */
 class MyUserAdmin(UserAdmin):
-    model = MyUser
+    model = User
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
@@ -23,7 +23,7 @@ class MyUserAdmin(UserAdmin):
     ordering = ('email',)
 
 # Now register the new UserAdmin...
-admin.site.register(MyUser, MyUserAdmin)
+admin.site.register(User, MyUserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)

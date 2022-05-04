@@ -1,9 +1,9 @@
 from django import forms
-from .models import MyUser
+from .models import User
 
 class SignUpForm(forms.ModelForm):
     class Meta:
-        model = MyUser
+        model = User
         fields = [ 'nickname' ]
 
         def signup(self, request, user):

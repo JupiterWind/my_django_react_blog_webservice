@@ -56,8 +56,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework', #추가
     'corsheaders', # 추가
+
+    # rest_auth
+    'rest_framework', #추가
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 
     'rest_framework_simplejwt', #jwt
 
@@ -181,10 +186,18 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=28),
 }
 
-AUTH_USER_MODEL = 'accounts.MyUser'
+AUTH_USER_MODEL = 'accounts.User'
+
+# dj-rest-auth
+REST_USE_JWT = True  #JWT 사용 여부
+JWT_AUTH_COOKIE = 'my-journal-webservice-auth'  #호출할 Cookie Key값
+JWT_AUTH_REFRESH_COOKIE = 'my-journal-webservice-refresh-token' #Refresh Token Cookie Key 값 (사용하는 경우)
 
 # allauth 설정
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email' #로그인시 username이 아니라 email을 사용
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True # 회원가입시 이메일 필수입력 항목으로 설정
 ACCOUNT_USERNAME_REQUIRED = False # username을 필수항목에서 제거
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignUpForm' #회원가입폼 커스텀 설정 필요할 경우 설정

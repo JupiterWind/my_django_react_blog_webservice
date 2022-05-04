@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from accounts.models import MyUser as User
+from accounts.models import User
 
 '''
 - Post : title, hook_text, content, created_at, updated_at, author, tags
