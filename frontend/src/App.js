@@ -7,6 +7,7 @@ import Header from './ui/Component/Layout/Header';
 import NavTab from './ui/Component/Layout/NavTab';
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
+import SignUp from './pages/auth/SignUp';
 import NotFound from './pages/NotFound';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Container>
