@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
+from accounts.models import MyUser as User
 
 '''
 - Post : title, hook_text, content, created_at, updated_at, author, tags
@@ -18,6 +20,7 @@ class Tag(models.Model):
         return f'/blog/tag/{self.slug}/'
 
 class Post(models.Model):
+    author = models.ForeignKey(User, on_delete=CASCADE)
     title = models.CharField(max_length=30)
     hook_text = models.CharField(max_length=100, blank=True)
     content = models.TextField()
@@ -33,6 +36,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

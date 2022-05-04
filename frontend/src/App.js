@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './ui/Material/Header';
 import NavTab from './ui/Material/NavTab';
 import Home from './pages/Home';
-import Login from './pages/Login';
+import Login from './pages/auth/Login';
 import NotFound from './pages/NotFound';
 
 const App = () => {

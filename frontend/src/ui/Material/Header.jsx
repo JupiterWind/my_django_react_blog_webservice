@@ -1,10 +1,18 @@
-import { AppBar, Toolbar, IconButton, Button, Box } from '@mui/material';
+import { React, useState } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  Box,
+  Drawer,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import CreateIcon from '@mui/icons-material/Create';
 import { withStyles } from '@mui/styles';
-import { myMaterialTheme as theme } from './Theme';
+import Menu from './Menu';
 
 const styles = {
   root: {
@@ -16,8 +24,15 @@ const styles = {
   },
 };
 
+const drawerWidth = 440;
+
 function Header(props) {
   const { classes } = props;
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  };
 
   return (
     <div className={classes.root}>
@@ -28,9 +43,14 @@ function Header(props) {
             edge="start"
             color="primary"
             aria-label="menu"
+            onClick={handleDrawerToggle}
           >
             <MenuIcon />
           </IconButton>
+          {/* Drawer */}
+          <Drawer open={drawerOpen} onClose={handleDrawerToggle}>
+            <Menu />
+          </Drawer>
           <Box className={classes.center}>
             <Button
               variant="contained"

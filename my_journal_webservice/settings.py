@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os, json
 from django.core.exceptions import ImproperlyConfigured
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,9 +56,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'blog',
     'rest_framework', #추가
     'corsheaders', # 추가
+
+    'rest_framework_simplejwt', #jwt
+
+    # allauth - 기본적인 회원가입 작동 및 유저 모델 커스터마이징
+    'allauth',
+    'allauth.socialaccount',
+    'allauth.account',
+	
+    # local
+    'blog',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +162,37 @@ STATIC_ROOT = os.path.join(BASE_DIR, '_static')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    # 인증된 사용자는 허용
+    'DEFAULT_PERMISSION_CLASSES': ( 
+        'rest_framework.permissions.IsAuthenticated', 
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': timedelta(days=7),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=28),
+}
+
+AUTH_USER_MODEL = 'accounts.MyUser'
+
+# allauth 설정
+ACCOUNT_AUTHENTICATION_METHOD = 'email' #로그인시 username이 아니라 email을 사용
+ACCOUNT_EMAIL_REQUIRED = True # 회원가입시 이메일 필수입력 항목으로 설정
+ACCOUNT_USERNAME_REQUIRED = False # username을 필수항목에서 제거
+ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignUpForm' #회원가입폼 커스텀 설정 필요할 경우 설정
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
