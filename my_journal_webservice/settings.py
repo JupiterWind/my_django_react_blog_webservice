@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', 
 
     'corsheaders', # 추가
 
@@ -172,6 +173,8 @@ REST_FRAMEWORK = {
     # 비인증 요청에게는 읽기 권한만 허용 (로그인이 되어 있지않아도 조회는 가능)
     'DEFAULT_PERMISSION_CLASSES': ( 
         'rest_framework.permissions.IsAuthenticatedOrReadOnly', 
+        #'rest_framework.permissions.IsAuthenticated', 
+        #'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -185,6 +188,8 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': timedelta(days=7),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=28),
 }
+
+SITE_ID = 1
 
 AUTH_USER_MODEL = 'accounts.User'
 

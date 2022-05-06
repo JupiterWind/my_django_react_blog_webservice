@@ -2,14 +2,14 @@ import { API_BASE_URL } from '../app-config';
 const ACCESS_TOKEN = 'ACCESS_TOKEN';
 
 export function call(api, method, request) {
-  let headers = new Headers({
-    'Content-Type': 'application/json',
-  });
-
+  // let headers = new Headers({"Content-Type": "application/json",});
+  let headers = { 'Content-Type': 'application/json' };
   // 로컬 스토리지에서 ACCESS_TOKEN 가져오기
   const accessToken = localStorage.getItem('ACCESS_TOKEN');
   if (accessToken && accessToken !== null) {
-    headers.append('Authorization', 'Bearer ' + accessToken);
+    // headers.append('Authorization', 'Bearer ' + accessToken);
+    headers.Authorization = `Bearer ${accessToken}`;
+    // alert(JSON.stringify(headers));
   }
 
   let options = {
@@ -17,10 +17,13 @@ export function call(api, method, request) {
     url: API_BASE_URL + api,
     method: method,
   };
+
   if (request) {
     // GET method
     options.body = JSON.stringify(request);
+    // alert(JSON.stringify(options));
   }
+
   return fetch(options.url, options)
     .then((response) =>
       response.json().then((json) => {
@@ -41,22 +44,24 @@ export function call(api, method, request) {
 }
 
 export function signin(userDTO) {
-  return call('/api/accounts/v1/login/', 'POST', userDTO).then((response) => {
+  return call('/api/accounts/login/', 'POST', userDTO).then((response) => {
     if (response.access_token) {
       // 로컬 스토리지에 토큰 저장
       localStorage.setItem('ACCESS_TOKEN', response.access_token);
-      // token이 존재하는 경우 Todo 화면으로 리디렉트
+      // token이 존재하는 경우 메인화면으로 리디렉트
       window.location.href = '/';
-      alert('로그인 토큰: ' + response.acess_token);
+      //alert('로그인 토큰: ' + response.acess_token);
     }
   });
 }
 
 export function signup(userDTO) {
-  return call('/api/accounts/v1/registration/', 'POST', userDTO);
+  return call('/api/accounts/registration/', 'POST', userDTO);
 }
 
 export function signout() {
-  localStorage.setItem(ACCESS_TOKEN, null);
-  window.location.href = '/login';
+  return call('/api/accounts/logout/', 'POST').then((response) => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    window.location.href = '/login';
+  });
 }

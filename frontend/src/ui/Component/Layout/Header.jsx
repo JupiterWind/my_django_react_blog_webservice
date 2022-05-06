@@ -5,6 +5,7 @@ import {
   IconButton,
   Button,
   Box,
+  Link,
   Drawer,
 } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -52,13 +53,15 @@ function Header(props) {
             <Menu />
           </Drawer>
           <Box className={classes.center}>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{ borderRadius: 3, pt: 0, pb: 0, fontSize: 14 }}
-            >
-              Jupiter Wind
-            </Button>
+            <Link href="/">
+              <Button
+                variant="contained"
+                size="small"
+                sx={{ borderRadius: 3, pt: 0, pb: 0, fontSize: 14 }}
+              >
+                Jupiter Wind
+              </Button>
+            </Link>
           </Box>
           <IconButton
             size="large"

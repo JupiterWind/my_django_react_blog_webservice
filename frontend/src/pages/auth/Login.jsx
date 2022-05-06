@@ -22,6 +22,19 @@ class Login extends React.Component {
     const password = data.get('password');
     // ApiService의 signin 메서드를 사용 해 로그인.
     signin({ email: email, password: password });
+
+    // 서버로부터 새로운 access token 발급받음
+    /*
+    fetch('http://localhost:8000/api/accounts/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+    */
   }
 
   render() {
