@@ -1,9 +1,13 @@
-import { Divider, Button } from '@mui/material';
+import { Divider, Button, Link } from '@mui/material';
 import { signout } from '../../../service/ApiService'; // signout 추가
 
 const Menu = () => (
   <div>
-    드로워
+    <Link href="/login">
+      <Button type="submit" fullWidth variant="contained" color="primary">
+        로그인
+      </Button>
+    </Link>
     <Divider />
     <Button
       type="submit"
