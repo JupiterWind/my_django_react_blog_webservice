@@ -1,24 +1,28 @@
 import { Divider, Button, Link } from '@mui/material';
-import { signout } from '../../../service/ApiService'; // signout 추가
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../store/authThunk';
 
-const Menu = () => (
-  <div>
-    <Link href="/login">
-      <Button type="submit" fullWidth variant="contained" color="primary">
-        로그인
+const Menu = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <Link href="/login">
+        <Button type="submit" fullWidth variant="contained" color="primary">
+          로그인
+        </Button>
+      </Link>
+      <Divider />
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        onClick={() => dispatch(logout())}
+      >
+        로그아웃
       </Button>
-    </Link>
-    <Divider />
-    <Button
-      type="submit"
-      fullWidth
-      variant="contained"
-      color="primary"
-      onClick={signout}
-    >
-      로그아웃
-    </Button>
-  </div>
-);
-
+    </div>
+  );
+};
 export default Menu;

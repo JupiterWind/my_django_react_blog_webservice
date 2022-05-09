@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import withStyles, { css } from '../withStyles';
+import withStyles, { css } from './withStyles';
 
 class Button extends PureComponent {
   render() {
@@ -13,7 +13,8 @@ class Button extends PureComponent {
       primary,
       secondary,
       onPress,
-      label, ...props
+      label,
+      ...props
     } = this.props;
     return (
       <button
@@ -22,9 +23,9 @@ class Button extends PureComponent {
           small && styles.small,
           large && styles.large,
           secondary && styles.secondary,
-          primary && styles.primary,
+          primary && styles.primary
         )}
-        style={backgroundColor && { backgroundColor}}
+        style={backgroundColor && { backgroundColor }}
         disabled={disabled}
         onClick={onPress}
         {...props}

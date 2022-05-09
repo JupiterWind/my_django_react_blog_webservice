@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Link,
@@ -7,91 +7,71 @@ import {
   Typography,
   Container,
 } from '@mui/material';
-import { signin } from '../../service/ApiService';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../store/authThunk';
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.target);
-    const email = data.get('email');
-    const password = data.get('password');
-    // ApiService의 signin 메서드를 사용 해 로그인.
-    signin({ email: email, password: password });
+    dispatch(login({ email, password }));
+  };
 
-    // 서버로부터 새로운 access token 발급받음
-    /*
-    fetch('http://localhost:8000/api/accounts/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, password: password }),
-    })
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-    */
-  }
-
-  render() {
-    return (
-      <Container component="main" maxWidth="xs" style={{ marginTop: '8%' }}>
+  return (
+    <Container component="main" maxWidth="xs" style={{ marginTop: '8%' }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography component="h1" variant="h5">
+            로그인
+          </Typography>
+        </Grid>
+      </Grid>
+      <form noValidate onSubmit={handleSubmit}>
+        {' '}
+        {/* submit 버튼을 누르면 handleSubmit이 실행됨. */}
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography component="h1" variant="h5">
+            <TextField
+              onChange={(e) => setEmail(e.target.value)}
+              variant="outlined"
+              required
+              fullWidth
+              id="email"
+              label="이메일 주소"
+              name="email"
+              autoComplete="email"
+              value={email}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              onChange={(e) => setPassword(e.target.value)}
+              variant="outlined"
+              required
+              fullWidth
+              name="password"
+              label="패스워드"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" fullWidth variant="contained" color="primary">
               로그인
-            </Typography>
+            </Button>
           </Grid>
+          <Link href="/signup" variant="body2">
+            <Grid item>계정이 없습니까? 여기서 가입 하세요.</Grid>
+          </Link>
         </Grid>
-        <form noValidate onSubmit={this.handleSubmit}>
-          {' '}
-          {/* submit 버튼을 누르면 handleSubmit이 실행됨. */}
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="이메일 주소"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="패스워드"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-              >
-                로그인
-              </Button>
-            </Grid>
-            <Link href="/signup" variant="body2">
-              <Grid item>계정이 없습니까? 여기서 가입 하세요.</Grid>
-            </Link>
-          </Grid>
-        </form>
-      </Container>
-    );
-  }
-}
+      </form>
+    </Container>
+  );
+};
 
 export default Login;

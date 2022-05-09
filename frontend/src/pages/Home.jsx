@@ -3,6 +3,9 @@ import { call } from '../service/ApiService';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [isAuthenticated, setAuthenticated] = useState(
+    localStorage.getItem('ACCESS_TOKEN') ? true : false
+  );
 
   useEffect(() => {
     try {

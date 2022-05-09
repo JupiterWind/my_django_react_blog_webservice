@@ -2,12 +2,10 @@ import { API_BASE_URL } from '../app-config';
 const ACCESS_TOKEN = 'ACCESS_TOKEN';
 
 export function call(api, method, request) {
-  // let headers = new Headers({"Content-Type": "application/json",});
   let headers = { 'Content-Type': 'application/json' };
   // 로컬 스토리지에서 ACCESS_TOKEN 가져오기
   const accessToken = localStorage.getItem('ACCESS_TOKEN');
   if (accessToken && accessToken !== null) {
-    // headers.append('Authorization', 'Bearer ' + accessToken);
     headers.Authorization = `Bearer ${accessToken}`;
     // alert(JSON.stringify(headers));
   }
@@ -35,7 +33,7 @@ export function call(api, method, request) {
       })
     )
     .catch((error) => {
-      console.log(error.status);
+      console.log(error);
       if (error.status === 403) {
         window.location.href = '/login'; //redirect
       }
@@ -48,8 +46,9 @@ export function signin(userDTO) {
     if (response.access_token) {
       // 로컬 스토리지에 토큰 저장
       localStorage.setItem('ACCESS_TOKEN', response.access_token);
+      return Promise.resolve(response);
       // token이 존재하는 경우 메인화면으로 리디렉트
-      window.location.href = '/';
+      //window.location.href = '/';
       //alert('로그인 토큰: ' + response.acess_token);
     }
   });

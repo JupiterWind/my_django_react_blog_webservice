@@ -1,12 +1,10 @@
 import React from 'react';
 
-//import { Button } from './Button';
-import Button from '../ui/Component/Button';
-
+import { Button } from './Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'ui/Button',
+  title: 'Example/Button',
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
@@ -20,7 +18,7 @@ export default {
 //export const Primary = () => <Button primary>전송하기</Button>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <Button {...args}/>;
+const Template = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
