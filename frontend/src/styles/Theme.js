@@ -1,9 +1,7 @@
 import { createTheme } from '@mui/material/styles';
-import { dark, light } from '@mui/material/styles/createPalette';
 
 export const myMaterialTheme = createTheme({
   palette: {
-    type: light,
     primary: {
       main: '#000000', // 주 색상
     },

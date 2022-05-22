@@ -8,7 +8,7 @@ import {
   Container,
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../../store/authThunk';
+import { login } from '../../features/auth/authThunk';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -66,7 +66,9 @@ const Login = () => {
             </Button>
           </Grid>
           <Link href="/signup" variant="body2">
-            <Grid item>계정이 없습니까? 여기서 가입 하세요.</Grid>
+            <Grid item marginTop={2} marginLeft={2}>
+              계정이 없습니까? 여기서 가입 하세요.
+            </Grid>
           </Link>
         </Grid>
       </form>

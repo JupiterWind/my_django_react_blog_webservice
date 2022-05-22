@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import { Box, Tabs, Tab } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
+import { Link as NextLink } from 'next/link';
+import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
@@ -34,12 +36,14 @@ function getActiveValue(pathname) {
   }
 }
 
-const NavTab = () => {
+const NavBar = () => {
   const [value, setValue] = useState(0);
   const location = useLocation();
+  const router = useRouter();
 
   useEffect(() => {
-    const pathname = location.pathname;
+    console.log(location, router);
+    const pathname = location.pathname || router.asPath;
     let activeValue = getActiveValue(pathname);
     setValue(activeValue);
   }, [location]);
@@ -60,9 +64,21 @@ const NavTab = () => {
         <StyledTab value={0} label="오늘" to="/" component={Link} />
         <StyledTab value={1} label="통계" to="/login" component={Link} />
         <StyledTab value={2} label="마이" to="/*" component={Link} />
+        {router && !router.pathname.includes('[[...app]]') && <NextNavBar />}
       </Tabs>
     </Box>
   );
 };
 
-export default NavTab;
+// 넥스트 내비게이션바
+function NextNavBar() {
+  return (
+    <>
+      <StyledTab value={0} label="오늘" href="/" component={NextLink} />
+      <StyledTab value={1} label="통계" href="/login" component={NextLink} />
+      <StyledTab value={2} label="마이" href="/*" component={NextLink} />
+    </>
+  );
+}
+
+export default NavBar;

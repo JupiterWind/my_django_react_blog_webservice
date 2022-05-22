@@ -181,11 +181,9 @@ REST_FRAMEWORK = {
     )
 }
 
-JWT_AUTH = {
-    'JWT_SECRET_KEY': SECRET_KEY,
-    'JWT_ALGORITHM': 'HS256',
-    'JWT_EXPIRATION_DELTA': timedelta(days=7),
-    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=28),
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=28),
 }
 
 SITE_ID = 1
@@ -196,6 +194,9 @@ AUTH_USER_MODEL = 'accounts.User'
 REST_USE_JWT = True  #JWT 사용 여부
 JWT_AUTH_COOKIE = 'my-journal-webservice-auth'  #호출할 Cookie Key값
 JWT_AUTH_REFRESH_COOKIE = 'my-journal-webservice-refresh-token' #Refresh Token Cookie Key 값 (사용하는 경우)
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer'
+}
 
 # allauth 설정
 ACCOUNT_UNIQUE_EMAIL = True
@@ -204,7 +205,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email' #로그인시 username이 아니라 emai
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True # 회원가입시 이메일 필수입력 항목으로 설정
 ACCOUNT_USERNAME_REQUIRED = False # username을 필수항목에서 제거
-ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignUpForm' #회원가입폼 커스텀 설정 필요할 경우 설정
+#ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignUpForm' #회원가입폼 커스텀 설정 필요할 경우 설정
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

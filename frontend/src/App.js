@@ -1,29 +1,37 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from './features/configureStore';
 import { ThemeProvider } from '@mui/material/styles';
 import { Container } from '@mui/material';
-import { myMaterialTheme as theme } from './ui/Theme';
-import { Route, Routes } from 'react-router-dom';
-import Header from './ui/Component/Layout/Header';
-import NavTab from './ui/Component/Layout/NavTab';
-import Home from './pages/Home';
-import Login from './pages/auth/Login';
-import SignUp from './pages/auth/SignUp';
-import NotFound from './pages/NotFound';
+import { myMaterialTheme as theme } from './styles/Theme';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/layout/Header';
+import NavBar from './components/layout/NavBar';
+import Home from './screens/Home';
+import Footer from './components/layout/Footer';
+import Login from './screens/auth/Login';
+import SignUp from './screens/auth/SignUp';
+import NotFound from './screens/NotFound';
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="sm" fixed>
-        <Header />
-        <NavTab />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-      </Container>
-    </ThemeProvider>
+    <Provider store={store}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <Container maxWidth="sm" fixed>
+            <Header />
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+          </Container>
+        </ThemeProvider>
+      </Router>
+    </Provider>
   );
 };
 

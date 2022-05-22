@@ -140,15 +140,24 @@ dmypy.json
 # production
 /build
 
-# misc
-.env.local
+# next.js
+*/.next/
+/out/
+
+# vercel
+.vercel
+
+# local env files
+.env*.local
 .env.development.local
 .env.test.local
 .env.production.local
+*.pem
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # 추가
 migrations/
@@ -160,3 +169,5 @@ db.sqlite3
 .env.prod.db
 .DS_Store
 docker-compose*
+
+
