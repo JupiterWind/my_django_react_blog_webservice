@@ -5,9 +5,9 @@ import {
   IconButton,
   Button,
   Box,
-  Link,
   Drawer,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -53,7 +53,7 @@ function Header(props) {
             <Menu />
           </Drawer>
           <Box className={classes.center}>
-            <Link href="/">
+            <Link to="/">
               <Button
                 variant="contained"
                 size="small"
