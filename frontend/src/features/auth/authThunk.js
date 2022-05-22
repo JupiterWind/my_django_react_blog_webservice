@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { call, signin, signout } from '../../service/ApiService';
-import { getToken, setToken, removeToken } from '../../utils/HelperFunctions';
 
 export const fetchUserData = createAsyncThunk(
   'auth/fetchUserData',
@@ -19,20 +19,34 @@ export const login = createAsyncThunk(
   'auth/login',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await signin(payload);
-      setToken(response.access_token);
-      //history.push('/');
-      return response;
+      const response = await axios.post('/api/accounts/login', payload);
+      return response.data;
     } catch (err) {
-      alert(err.detail);
-      return rejectWithValue(err.detail);
+      return rejectWithValue(err.response.data.message);
     }
   }
 );
 
-export const logout = createAsyncThunk('auth/logout', async () => {
-  const response = await signout();
-  removeToken();
-  //history.push('/login');
-  return response;
-});
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/api/accounts/logout', payload);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/api/accounts/register', payload);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);

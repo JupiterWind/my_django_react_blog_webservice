@@ -42,7 +42,7 @@ const NavBar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(location, router);
+    //console.log(location, router);
     const pathname = location.pathname || router.asPath;
     let activeValue = getActiveValue(pathname);
     setValue(activeValue);

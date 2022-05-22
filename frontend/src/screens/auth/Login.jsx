@@ -33,7 +33,7 @@ const Login = () => {
     }
 
     if (isError) {
-      console.log(errorMessage);
+      alert(errorMessage);
       dispatch(clearState());
       navigate('/login');
     }
@@ -48,7 +48,7 @@ const Login = () => {
           </Typography>
         </Grid>
       </Grid>
-      <form noValidate onSubmit={handleSubmit}>
+      <form Validate onSubmit={handleSubmit}>
         {' '}
         {/* submit 버튼을 누르면 handleSubmit이 실행됨. */}
         <Grid container spacing={2}>

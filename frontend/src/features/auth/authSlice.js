@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUserData, login, logout } from './authThunk';
+import { fetchUserData, login, logout, register } from './authThunk';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -41,6 +41,13 @@ export const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.isAuthenticated = false;
+        state.isError = true;
+        state.errorMessage = action.payload;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isSuccess = true;
+      })
+      .addCase(register.rejected, (state, action) => {
         state.isError = true;
         state.errorMessage = action.payload;
       });

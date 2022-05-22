@@ -4,7 +4,8 @@ import { fetchUserData, logout } from '../../features/auth/authThunk';
 
 const Menu = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, userData } = useSelector((state) => state.auth);
+  const { isAuthenticated, userData, isSuccess, isError, errorMessage } =
+    useSelector((state) => state.auth);
 
   return (
     <div>
