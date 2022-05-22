@@ -62,7 +62,7 @@ const NavBar = () => {
         indicatorColor="primary"
       >
         <StyledTab value={0} label="오늘" to="/" component={Link} />
-        <StyledTab value={1} label="통계" to="/login" component={Link} />
+        <StyledTab value={1} label="통계" to="/*" component={Link} />
         <StyledTab value={2} label="마이" to="/*" component={Link} />
         {router && !router.pathname.includes('[[...app]]') && <NextNavBar />}
       </Tabs>

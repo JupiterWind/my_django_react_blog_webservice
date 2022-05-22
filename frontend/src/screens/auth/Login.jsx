@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Link,
@@ -8,17 +8,36 @@ import {
   Container,
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../features/auth/authThunk';
+import { clearState } from '../../features/auth/authSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { isAuthenticated, userData, isSuccess, isError, errorMessage } =
+    useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(login({ email, password }));
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearState());
+      navigate('/');
+    }
+
+    if (isError) {
+      console.log(errorMessage);
+      dispatch(clearState());
+      navigate('/login');
+    }
+  }, [isSuccess, isError]);
 
   return (
     <Container component="main" maxWidth="xs" style={{ marginTop: '8%' }}>
