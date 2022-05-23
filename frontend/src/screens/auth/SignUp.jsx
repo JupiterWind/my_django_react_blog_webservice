@@ -52,7 +52,7 @@ const SignUp = () => {
 
   return (
     <Container component="main" maxWidth="xs" style={{ marginTop: '8%' }}>
-      <form Validate onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography component="h1" variant="h5">
@@ -68,6 +68,7 @@ const SignUp = () => {
               label="이메일 주소"
               name="email"
               autoComplete="email"
+              autoFocus
             />
           </Grid>
           <Grid item xs={12}>
@@ -91,7 +92,6 @@ const SignUp = () => {
               id="password2"
               label="패스워드2"
               type="password"
-              autoFocus
             />
           </Grid>
           <Grid item xs={12}>

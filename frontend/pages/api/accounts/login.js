@@ -1,6 +1,10 @@
 import cookie from 'cookie';
 import Api from '../../../src/service/Api';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../../src/config';
+import {
+  authAlertMessage,
+  authFailMessage,
+} from '../../../src/config/notifyMessage';
 
 export default async (req, res) => {
   if (req.method === 'POST') {
@@ -30,12 +34,12 @@ export default async (req, res) => {
         return res.status(200).json({ user: user });
       } else {
         return res.status(response.status).json({
-          message: 'Authentication failed',
+          message: authFailMessage,
         });
       }
     } catch (err) {
       return res.status(500).json({
-        message: 'Something went wrong when authenticating',
+        message: authAlertMessage,
       });
     }
   } else {

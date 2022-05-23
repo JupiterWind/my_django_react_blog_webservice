@@ -5,6 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Container } from '@mui/material';
 import { myMaterialTheme as theme } from './styles/Theme';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/layout/Header';
 import NavBar from './components/layout/NavBar';
 import Home from './screens/Home';
@@ -29,6 +31,7 @@ const App = () => {
             </Routes>
             <Footer />
           </Container>
+          <ToastContainer />
         </ThemeProvider>
       </Router>
     </Provider>

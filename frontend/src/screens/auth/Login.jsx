@@ -33,9 +33,9 @@ const Login = () => {
     }
 
     if (isError) {
-      alert(errorMessage);
-      dispatch(clearState());
-      navigate('/login');
+      //alert(errorMessage);
+      //dispatch(clearState());
+      //navigate('/login');
     }
   }, [isSuccess, isError]);
 
@@ -48,7 +48,7 @@ const Login = () => {
           </Typography>
         </Grid>
       </Grid>
-      <form Validate onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         {' '}
         {/* submit 버튼을 누르면 handleSubmit이 실행됨. */}
         <Grid container spacing={2}>
